@@ -2,7 +2,12 @@ variable "access_key" {}
 variable "secret_key" {}
 
 variable "server_count" {
-  default = 2
+  type = "map"
+
+  default = {
+    virginia = 3
+    ohio     = 2
+  }
 }
 
 variable "subnet" {
