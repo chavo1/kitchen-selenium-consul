@@ -8,23 +8,31 @@ public_dns_servers_varna = attribute(
   description: "server dns"
 )
 
-0.upto(1) do |n|
-  describe http("http://#{public_dns_servers_sofia[n]}:8500/ui/sofia/services") do
+# puts(public_dns_servers_sofia.length)
+# puts(public_dns_servers_varna.length)
+
+1.upto(public_dns_servers_sofia.length) do |x|
+  
+  describe http("http://#{public_dns_servers_sofia[x -1]}:8500/ui/sofia/services") do
     its('status') { should cmp 200 }
   end
-  describe http("http://#{public_dns_servers_sofia[n]}:8500/ui/sofia/nodes") do
+  describe http("http://#{public_dns_servers_sofia[x -1]}:8500/ui/sofia/nodes") do
     its('status') { should cmp 200 }
   end
-  describe http("http://#{public_dns_servers_sofia[n]}:8500/ui/sofia/services/web") do
+  describe http("http://#{public_dns_servers_sofia[x -1]}:8500/ui/sofia/services/web") do
     its('status') { should cmp 200 }
   end
-  describe http("http://#{public_dns_servers_varna[n]}:8500/ui/varna/services") do
+end
+
+1.upto(public_dns_servers_varna.length) do |y|
+
+  describe http("http://#{public_dns_servers_varna[y -1]}:8500/ui/varna/services") do
   its('status') { should cmp 200 }
   end
-  describe http("http://#{public_dns_servers_varna[n]}:8500/ui/varna/nodes") do
+  describe http("http://#{public_dns_servers_varna[y -1]}:8500/ui/varna/nodes") do
     its('status') { should cmp 200 }
   end
-  describe http("http://#{public_dns_servers_varna[n]}:8500/ui/varna/services/web") do
+  describe http("http://#{public_dns_servers_varna[y -1]}:8500/ui/varna/services/web") do
     its('status') { should cmp 200 }
   end
 end
